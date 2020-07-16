@@ -30,6 +30,7 @@ export class DatabaseService {
   private static csvStringToWinners(data: string): WinnerYear[] {
     let winners = data
       .split('\n')
+      .filter(line => !!line && line.trim() != '')
       .map(line => {
         let attributes = line.split(',');
         let winner = new Winner();
