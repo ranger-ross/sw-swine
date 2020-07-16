@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from '../service/database.service';
 import { WinnerYear } from '../model/winner-year.model';
 import { Winner } from '../model/winner.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ImageViewModalComponent } from '../image-view-modal/image-view-modal.component';
 
 @Component({
   selector: 'app-winners',
@@ -13,7 +15,8 @@ export class WinnersComponent implements OnInit {
   winnerContextPath = 'assets/winners/';
   years: WinnerYear[];
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(private databaseService: DatabaseService,
+    private $modal: NgbModal) { }
 
   ngOnInit(): void {
     this.databaseService.getWinners().subscribe(years => {
@@ -23,6 +26,18 @@ export class WinnersComponent implements OnInit {
   }
 
   openWinner(winner: Winner) {
-    console.log('todo: open winner...', winner);
+    console.log('opening winner', winner);
+    const modal = this.$modal.open(ImageViewModalComponent, {
+      size: 'xl'
+    });
+    modal.componentInstance.imagePath = this.winnerContextPath + winner.imagePath
+    if (winner.name && winner.name.trim() != '') {
+      modal.componentInstance.title = winner.name;
+      if (winner.place && winner.place.trim() != '') {
+        modal.componentInstance.title += ' - ' + winner.place
+      }
+    } else {
+      modal.componentInstance.title = winner.year;
+    }
   }
 }
