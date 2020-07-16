@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouteConstants } from '../app.routing.module';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  readonly routes = RouteConstants;
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
+
+  navigate(route: string) {
+      this.router.navigate([route]);
+  }
+
 
 }
