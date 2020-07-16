@@ -1,31 +1,38 @@
 <div class="container">
-	<div class="row card">
-		<div class="card-body">
-			<h5 class="card-title">Upcoming Litters 2020</h5>
+	<div class="row">
+		<div class="col card">
+			<div class="card-body">
+				<h5 class="card-title">Upcoming Litters 2020</h5>
+	
+				<div class="table-responsive" style="max-width: 100%;">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Breed</th>
+								<th>Litter Number</th>
+								<th>Sire</th>
+								<th>Dam Sire</th>
+								<th>Date Born</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let litter of litters">
+								<td>{{litter.breed}}</td>
+								<td>{{litter.litterNumber}}</td>
+								<td>{{litter.sire}}</td>
+								<td>{{litter.damSire}}</td>
+								<td>{{litter.dob}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
-			<table class="w-100 table">
-				<thead>
-					<tr>
-						<th>Breed</th>
-						<th>Litter Number</th>
-						<th>Sire</th>
-						<th>Dam Sire</th>
-						<th>Date Born</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr *ngFor="let litter of litters">
-						<td>{{litter.breed}}</td>
-						<td>{{litter.litterNumber}}</td>
-						<td>{{litter.sire}}</td>
-						<td>{{litter.damSire}}</td>
-						<td>{{litter.dob}}</td>
-					</tr>
-				</tbody>
-			</table>
-
+			</div>
 		</div>
+	
+	
 	</div>
+
 
 
 </div>
