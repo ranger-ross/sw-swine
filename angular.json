@@ -32,6 +32,8 @@
               "node_modules/bootstrap/scss/bootstrap.scss"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/js/dist/util.js"
             ]
           },
           "configurations": {

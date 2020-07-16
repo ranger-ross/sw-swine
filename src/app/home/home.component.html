@@ -1,1 +1,27 @@
-<p>home works!</p>
+<div class="container-fluid">
+	<div class="row card mt-2">
+		<div class="card-body">
+			<h5 class="card-title text-center">Welcome To S & W Swine</h5>
+
+			<ngb-carousel class="carousel-home">
+				<ng-template ngbSlide>
+					<div class="row">
+						<img class="col-12" [src]="images[0]" alt="...">
+					</div>
+				</ng-template>
+				<ng-template ngbSlide>
+					<div class="row">
+						<img class="col-12" [src]="images[1]" alt="...">
+					</div>
+				</ng-template>
+				<ng-template ngbSlide>
+					<div class="row">
+						<img class="col-12" [src]="images[2]" alt="...">
+					</div>
+				</ng-template>
+			</ngb-carousel>
+
+
+		</div>
+	</div>
+</div>

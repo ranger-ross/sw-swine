@@ -11,6 +11,7 @@ import { UpcomingLittersComponent } from './upcoming-litters/upcoming-litters.co
 import { WinnersComponent } from './winners/winners.component';
 import { HerdSiresComponent } from './herd-sires/herd-sires.component';
 import { AboutComponent } from './about/about.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AboutComponent } from './about/about.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [DatabaseService],
   bootstrap: [AppComponent]
