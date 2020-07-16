@@ -17,7 +17,7 @@ export class NavBarComponent implements OnInit {
   }
 
   navigate(route: string) {
-      this.router.navigate([route]);
+      this.router.navigate([route], { skipLocationChange: true });
   }
 
 
