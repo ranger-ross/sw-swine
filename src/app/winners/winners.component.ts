@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { DatabaseService } from '../service/database.service';
 import { WinnerYear } from '../model/winner-year.model';
 import { Winner } from '../model/winner.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ImageViewModalComponent } from '../image-view-modal/image-view-modal.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-winners',
@@ -13,8 +14,10 @@ import { ImageViewModalComponent } from '../image-view-modal/image-view-modal.co
 export class WinnersComponent implements OnInit {
 
   winnerContextPath = 'assets/winners/';
-  years: WinnerYear[];
-
+  years: WinnerYear[] = [];
+  batchSize = 4;
+  currentBatch = 1;
+  
   constructor(private databaseService: DatabaseService,
     private $modal: NgbModal) { }
 
@@ -40,4 +43,27 @@ export class WinnersComponent implements OnInit {
       modal.componentInstance.title = winner.year;
     }
   }
+
+  get tableData() {
+    let totalBatches = Math.ceil(this.years.length / this.batchSize);
+    let index = this.batchSize * this.currentBatch;
+
+    if (index >= this.years.length) {
+      return this.years;
+    } else {
+      return this.years.slice(0, index);
+    }
+  }
+
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+    if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight * 0.9)) {
+      if ((this.batchSize * this.currentBatch) < this.years.length) {
+        this.currentBatch += 1;
+      }
+    }
+  }
+
+
+
 }
