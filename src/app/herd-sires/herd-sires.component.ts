@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../service/database.service';
+import { HerdSire } from '../model/herd-sire.model';
 
 @Component({
   selector: 'app-herd-sires',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HerdSiresComponent implements OnInit {
 
-  constructor() { }
+  imageContext = '../../assets/herd-sires/'
+  herdSires: HerdSire[] = [];
+
+  constructor(private databaseService: DatabaseService) { }
 
   ngOnInit(): void {
+    this.databaseService.getHerdSires().subscribe(
+      data => {
+        console.log('Loaded Herd Sires', data);
+        this.herdSires = data;
+      }
+    )
+
   }
 
 }

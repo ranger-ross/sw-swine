@@ -4,6 +4,7 @@ import { Observable, of, merge } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { WinnerYear } from '../model/winner-year.model';
+import { HerdSire } from '../model/herd-sire.model';
 import { Winner } from '../model/winner.model';
 
 @Injectable({
@@ -27,6 +28,30 @@ export class DatabaseService {
       );
   }
 
+  getHerdSires(): Observable<HerdSire[]> {
+    return this.http.get('assets/herd-sires.csv', { responseType: 'text' })
+      .pipe(
+        mergeMap(data => of(DatabaseService.csvStringToHerdSires(data)))
+      );
+  }
+
+  private static csvStringToHerdSires(data: string): HerdSire[] {
+    return data
+      .split('\n')
+      .filter(line => !!line && line.trim() != '')
+      .map(line => {
+        let attributes = line
+          .split(',')
+          .map(attr => attr.split('^').join(','));
+        let sire = new HerdSire();
+        sire.name = attributes[0];
+        sire.imagePath = attributes[1];
+        sire.description = attributes[2];
+        sire.link = attributes[3];
+        return sire;
+      });
+  }
+
   private static csvStringToWinners(data: string): WinnerYear[] {
     let winners = data
       .split('\n')
@@ -42,18 +67,18 @@ export class DatabaseService {
         return winner;
       });
 
-      let years: WinnerYear[] = [];
-      for (let winner of winners) {
-        let year = years.find(y => y.year == winner.year);
-        if (!year) {
-            year = new WinnerYear();
-            year.year = winner.year;
-            years.push(year);
-        }
-
-        year.winners.push(winner);
+    let years: WinnerYear[] = [];
+    for (let winner of winners) {
+      let year = years.find(y => y.year == winner.year);
+      if (!year) {
+        year = new WinnerYear();
+        year.year = winner.year;
+        years.push(year);
       }
-      return years;
+
+      year.winners.push(winner);
+    }
+    return years;
   }
 
 
