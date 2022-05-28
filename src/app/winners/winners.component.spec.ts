@@ -1,16 +1,26 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { WinnersComponent } from './winners.component';
+import {WinnersComponent} from './winners.component';
+import {DatabaseService} from "../service/database.service";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {of} from "rxjs";
 
 describe('WinnersComponent', () => {
   let component: WinnersComponent;
   let fixture: ComponentFixture<WinnersComponent>;
 
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ WinnersComponent ]
+      declarations: [WinnersComponent],
+      imports: [
+        NgbModule
+      ],
+      providers: [
+        {provide: DatabaseService, useValue: {getWinners: () => of([])}}
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

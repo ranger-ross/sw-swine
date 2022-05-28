@@ -1,49 +1,29 @@
-import { Injectable } from '@angular/core';
-import { Litter } from '../model/litter.model';
-import { Observable, of, merge } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
-import { WinnerYear } from '../model/winner-year.model';
-import { HerdSire } from '../model/herd-sire.model';
-import { Winner } from '../model/winner.model';
+import {Injectable} from '@angular/core';
+import {Litter} from '../model/litter.model';
+import {Observable, of} from 'rxjs';
+import {mergeMap} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {WinnerYear} from '../model/winner-year.model';
+import {HerdSire} from '../model/herd-sire.model';
+import {Winner} from '../model/winner.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
 
-  constructor(private http: HttpClient) { }
-
-  getUpcomingLitters(): Observable<Litter[]> {
-    return this.http.get('assets/litters.csv', { responseType: 'text' })
-      .pipe(
-        mergeMap(data => of(DatabaseService.csvStringToLitters(data)))
-      );
-  }
-
-  getWinners(): Observable<WinnerYear[]> {
-    return this.http.get('assets/winners.csv', { responseType: 'text' })
-      .pipe(
-        mergeMap(data => of(DatabaseService.csvStringToWinners(data)))
-      );
-  }
-
-  getHerdSires(): Observable<HerdSire[]> {
-    return this.http.get('assets/herd-sires.csv', { responseType: 'text' })
-      .pipe(
-        mergeMap(data => of(DatabaseService.csvStringToHerdSires(data)))
-      );
+  constructor(private http: HttpClient) {
   }
 
   private static csvStringToHerdSires(data: string): HerdSire[] {
     return data
       .split('\n')
-      .filter(line => !!line && line.trim() != '')
+      .filter(line => !!line && line.trim() !== '')
       .map(line => {
-        let attributes = line
+        const attributes = line
           .split(',')
           .map(attr => attr.split('^').join(','));
-        let sire = new HerdSire();
+        const sire = new HerdSire();
         sire.name = attributes[0];
         sire.imagePath = attributes[1];
         sire.description = attributes[2];
@@ -53,12 +33,12 @@ export class DatabaseService {
   }
 
   private static csvStringToWinners(data: string): WinnerYear[] {
-    let winners = data
+    const winners = data
       .split('\n')
-      .filter(line => !!line && line.trim() != '')
+      .filter(line => !!line && line.trim() !== '')
       .map(line => {
-        let attributes = line.split(',');
-        let winner = new Winner();
+        const attributes = line.split(',');
+        const winner = new Winner();
         winner.year = Number(attributes[0]);
         winner.imagePath = attributes[1];
         winner.show = attributes[2];
@@ -67,8 +47,8 @@ export class DatabaseService {
         return winner;
       });
 
-    let years: WinnerYear[] = [];
-    for (let winner of winners) {
+    const years: WinnerYear[] = [];
+    for (const winner of winners) {
       let year = years.find(y => y.year == winner.year);
       if (!year) {
         year = new WinnerYear();
@@ -86,8 +66,8 @@ export class DatabaseService {
     return data
       .split('\n')
       .map(line => {
-        let attributes = line.split(',');
-        let litter = new Litter();
+        const attributes = line.split(',');
+        const litter = new Litter();
         litter.breed = attributes[0];
         litter.litterNumber = Number(attributes[1]);
         litter.sire = attributes[2];
@@ -97,6 +77,26 @@ export class DatabaseService {
       });
   }
 
+  getUpcomingLitters(): Observable<Litter[]> {
+    return this.http.get('assets/litters.csv', {responseType: 'text'})
+      .pipe(
+        mergeMap(data => of(DatabaseService.csvStringToLitters(data)))
+      );
+  }
+
+  getWinners(): Observable<WinnerYear[]> {
+    return this.http.get('assets/winners.csv', {responseType: 'text'})
+      .pipe(
+        mergeMap(data => of(DatabaseService.csvStringToWinners(data)))
+      );
+  }
+
+  getHerdSires(): Observable<HerdSire[]> {
+    return this.http.get('assets/herd-sires.csv', {responseType: 'text'})
+      .pipe(
+        mergeMap(data => of(DatabaseService.csvStringToHerdSires(data)))
+      );
+  }
 
 
 }

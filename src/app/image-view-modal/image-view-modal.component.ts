@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-image-view-modal',
@@ -11,7 +11,8 @@ export class ImageViewModalComponent implements OnInit {
   title: string;
   imagePath: string;
 
-  constructor(private $activeModal: NgbActiveModal) { }
+  constructor(private $activeModal: NgbActiveModal) {
+  }
 
   ngOnInit(): void {
   }

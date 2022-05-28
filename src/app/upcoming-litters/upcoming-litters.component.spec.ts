@@ -1,6 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { UpcomingLittersComponent } from './upcoming-litters.component';
+import {UpcomingLittersComponent} from './upcoming-litters.component';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {DatabaseService} from "../service/database.service";
+import {of} from "rxjs";
 
 describe('UpcomingLittersComponent', () => {
   let component: UpcomingLittersComponent;
@@ -8,9 +11,15 @@ describe('UpcomingLittersComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ UpcomingLittersComponent ]
+      declarations: [UpcomingLittersComponent],
+      imports: [
+        NgbModule
+      ],
+      providers: [
+        {provide: DatabaseService, useValue: {getUpcomingLitters: () => of([])}}
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
