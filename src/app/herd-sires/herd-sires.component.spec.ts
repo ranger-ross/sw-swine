@@ -1,16 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { HerdSiresComponent } from './herd-sires.component';
+import {HerdSiresComponent} from './herd-sires.component';
+import {UpcomingLittersComponent} from "../upcoming-litters/upcoming-litters.component";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {DatabaseService} from "../service/database.service";
+import {of} from "rxjs";
 
 describe('HerdSiresComponent', () => {
   let component: HerdSiresComponent;
   let fixture: ComponentFixture<HerdSiresComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HerdSiresComponent ]
+      declarations: [HerdSiresComponent],
+      imports: [
+        NgbModule
+      ],
+      providers: [
+        {provide: DatabaseService, useValue: {getHerdSires: () => of([])}}
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

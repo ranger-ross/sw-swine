@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { DatabaseService } from '../service/database.service';
-import { Litter } from '../model/litter.model';
+import {Component, OnInit} from '@angular/core';
+import {DatabaseService} from '../service/database.service';
+import {Litter} from '../model/litter.model';
 
 @Component({
   selector: 'app-upcoming-litters',
@@ -11,7 +11,8 @@ export class UpcomingLittersComponent implements OnInit {
 
   litters: Litter[];
 
-  constructor(private databaseService: DatabaseService) { }
+  constructor(private databaseService: DatabaseService) {
+  }
 
   ngOnInit(): void {
     this.databaseService.getUpcomingLitters().subscribe(
@@ -19,7 +20,7 @@ export class UpcomingLittersComponent implements OnInit {
         console.log('Loaded litters', data);
         this.litters = data;
       }
-    )
+    );
   }
 
 }
