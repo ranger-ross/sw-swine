@@ -18,6 +18,6 @@ lftp -c "open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER; $COMMANDS"
 
 
 # Debugging Code
-#lftp -u 'deployer-svc-accnt,r@wVe7aTTf6hP*' ftp://ftp.s-wswine.com
+#lftp -u "$FTP_USERNAME,$FTP_PASSWORD" $FTP_SERVER
 #
 #ls
