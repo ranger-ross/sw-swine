@@ -5,7 +5,7 @@ FTP_PASSWORD=$1
 # ftp commands
 COMMANDS="\
 rmdir -f backup;\
-mkdir -p ross;\
+mkdir -p backup;\
 mmv *.html backup/
 mmv *.js backup/;\
 mmv *.css backup/;\
