@@ -17,7 +17,6 @@ jobs:
         with:
           node-version: "16"
           cache: "npm"
-      - run: echo $GITHUB_REF_NAME > assets/version.txt
       - run: npm install
       - run: npm run build
       - uses: actions/upload-artifact@v2
@@ -25,7 +24,7 @@ jobs:
           name: angular-app
           path: dist
 
-  Deploy-To-Cloud-Run:
+  Deploy:
     needs: [ Build-App ]
     runs-on: ubuntu-latest
     permissions:
