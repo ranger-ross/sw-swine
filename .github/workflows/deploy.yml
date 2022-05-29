@@ -26,7 +26,7 @@ jobs:
           path: dist
 
   Deploy-To-Cloud-Run:
-    needs: [ Build-Docker-Image ]
+    needs: [ Build-App ]
     runs-on: ubuntu-latest
     permissions:
       contents: read
