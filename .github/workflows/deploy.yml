@@ -39,8 +39,8 @@ jobs:
           name: angular-app
           path: dist
 
-      - run: apt-get update
-      - run: apt-get install lftp
+      - run: sudo apt-get update
+      - run: sudo apt-get install lftp
 
       - run: ./deploy/deploy.sh ${{ secrets.FTP_SERVICE_ACCOUNT_PASSWORD }}
 
