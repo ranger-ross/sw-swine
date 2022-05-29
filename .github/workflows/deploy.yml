@@ -1,0 +1,47 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+      - test
+
+jobs:
+
+  Build-App:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          cache: "npm"
+      - run: echo $GITHUB_REF_NAME > assets/version.txt
+      - run: npm install
+      - run: npm run build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: angular-app
+          path: dist
+
+  Deploy-To-Cloud-Run:
+    needs: [ Build-Docker-Image ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: angular-app
+          path: dist
+
+      - run: apt-get update
+      - run: apt-get install lftp
+
+      - run: ./deploy/deploy.sh ${{ secrets.FTP_SERVICE_ACCOUNT_PASSWORD }}
+
