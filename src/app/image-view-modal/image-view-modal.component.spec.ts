@@ -1,9 +1,7 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {ImageViewModalComponent} from './image-view-modal.component';
-import {NgbActiveModal, NgbCarousel, NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {DatabaseService} from "../service/database.service";
-import {of} from "rxjs";
+import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 describe('ImageViewModalComponent', () => {
   let component: ImageViewModalComponent;

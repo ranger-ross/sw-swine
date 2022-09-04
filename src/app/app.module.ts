@@ -12,7 +12,7 @@ import { WinnersComponent } from './winners/winners.component';
 import { HerdSiresComponent } from './herd-sires/herd-sires.component';
 import { AboutComponent } from './about/about.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {ImageViewModalComponent} from "./image-view-modal/image-view-modal.component";
+import {ImageViewModalComponent} from './image-view-modal/image-view-modal.component';
 
 @NgModule({
   declarations: [
