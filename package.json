@@ -35,7 +35,7 @@
     "@types/jasminewd2": "2.0.8",
     "@types/jest": "latest",
     "@types/node": "18.7.14",
-    "codelyzer": "6.0.0",
+    "codelyzer": "6.0.2",
     "jasmine-spec-reporter": "5.0.2",
     "jest": "latest",
     "protractor": "7.0.0",
