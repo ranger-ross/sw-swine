@@ -3,6 +3,7 @@
   "extends": [
     "config:base"
   ],
+  "schedule": ["0 0 1 * *"]
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
